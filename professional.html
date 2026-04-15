@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joseph Hilton | Professional Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #dfe4ea;
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-strong: #fdfefe;
+      --ink: #17212b;
+      --muted: #4b5866;
+      --line: rgba(16, 30, 44, 0.16);
+      --navy: #112c45;
+      --navy-deep: #091b2d;
+      --gold: #b88a3f;
+      --highlight: rgba(184, 138, 63, 0.34);
+      --shadow: 0 20px 44px rgba(9, 27, 45, 0.16);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(184, 138, 63, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(17, 44, 69, 0.16), transparent 30%),
+        linear-gradient(180deg, #e7ebf0 0%, var(--bg) 52%, #d3dae2 100%);
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: "Libre Baskerville", serif;
+    }
+
+    a {
+      color: var(--navy);
+    }
+
+    a:hover {
+      color: var(--navy-deep);
+    }
+
+    .page-shell {
+      max-width: 1240px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(15, 36, 57, 0.98), rgba(22, 50, 79, 0.92)),
+        linear-gradient(120deg, rgba(200, 155, 75, 0.25), transparent 55%);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -45% auto;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200, 155, 75, 0.28), transparent 68%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f3e7d0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      color: #ffffff;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 0.98;
+    }
+
+    .hero-subtitle {
+      max-width: 680px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.08rem;
+    }
+
+    .hero-metric {
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+      padding-left: 1rem;
+    }
+
+    .hero-metric-label {
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-metric-value {
+      color: #ffffff;
+      font-size: 1.45rem;
+      font-weight: 800;
+    }
+
+    .profile-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card {
+      padding: 2rem;
+      height: 100%;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .profile-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(22, 50, 79, 0.08);
+      color: var(--navy);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .section-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .profile-card:hover,
+    .section-card:hover,
+    .tab-panel:hover,
+    .feature-stat:hover {
+      border-color: var(--highlight);
+      box-shadow:
+        0 0 0 4px rgba(184, 138, 63, 0.12),
+        0 22px 46px rgba(9, 27, 45, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .section-kicker {
+      margin-bottom: 0.8rem;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin-bottom: 1.25rem;
+      font-size: 2rem;
+    }
+
+    .timeline-item + .timeline-item {
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-role {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    .timeline-meta {
+      color: var(--muted);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .timeline-item ul {
+      margin-bottom: 0;
+      padding-left: 1.15rem;
+      color: #334155;
+    }
+
+    .timeline-item li + li {
+      margin-top: 0.45rem;
+    }
+
+    .skill-badge {
+      display: inline-block;
+      margin: 0.3rem 0.4rem 0.3rem 0;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid rgba(22, 50, 79, 0.12);
+      border-radius: 999px;
+      background: #f7f9fb;
+      color: var(--navy);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .nav-pills.professional-tabs {
+      gap: 0.75rem;
+    }
+
+    .nav-pills.professional-tabs .nav-link {
+      border: 1px solid rgba(22, 50, 79, 0.12);
+      border-radius: 999px;
+      padding: 0.85rem 1.2rem;
+      color: var(--navy);
+      background: #f8f7f4;
+      font-weight: 800;
+    }
+
+    .nav-pills.professional-tabs .nav-link.active {
+      background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(22, 50, 79, 0.22);
+    }
+
+    .tab-panel {
+      margin-top: 1.5rem;
+      padding: 1.75rem;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fbfcfd 0%, #eef2f6 100%);
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-stat {
+      height: 100%;
+      padding: 1.3rem;
+      border: 1px solid rgba(17, 44, 69, 0.12);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-stat-label {
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .feature-stat strong {
+      display: block;
+      color: var(--navy-deep);
+      font-size: 1.3rem;
+    }
+
+    .mini-heading {
+      color: var(--navy-deep);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .divider-line {
+      height: 1px;
+      margin: 1.5rem 0;
+      background: linear-gradient(90deg, rgba(22, 50, 79, 0.18), transparent);
+    }
+
+    @media (max-width: 991.98px) {
+      .profile-card {
+        padding: 1.5rem;
+      }
+
+      .section-card {
+        padding: 1.5rem;
+      }
+
+      .tab-panel {
+        padding: 1.25rem;
+      }
+
+      .hero-metric {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+        padding-left: 0;
+        padding-top: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell container py-4 py-lg-5">
+    <section class="hero-panel px-4 px-lg-5 py-5 mb-4 mb-lg-5">
+      <div class="row align-items-end g-4">
+        <div class="col-lg-8">
+          <h1 class="hero-title mb-3">Joseph Hilton</h1>
+          <p class="hero-subtitle mb-4">
+            Finance-focused student leader, entrepreneur, and client-facing communicator with
+            experience in reporting, invoicing, process improvement, and high-trust service.
+          </p>
+          <div class="d-flex flex-wrap gap-2 gap-lg-3">
+            <span class="profile-chip">Orem, Utah</span>
+            <a class="profile-chip" href="tel:18014276518">(801) 427-6518</a>
+            <a class="profile-chip" href="mailto:josephfhilton@gmail.com">josephfhilton@gmail.com</a>
+            <span class="profile-chip">LinkedIn available upon request</span>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="row g-3">
+            <div class="col-sm-4 col-lg-12">
+              <div class="hero-metric">
+                <div class="hero-metric-label">Current Role</div>
+                <div class="hero-metric-value">Director of Finance</div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-lg-12">
+              <div class="hero-metric">
+                <div class="hero-metric-label">Career Shows</div>
+                <div class="hero-metric-value">100+</div>
+              </div>
+            </div>
+            <div class="col-sm-4 col-lg-12">
+              <div class="hero-metric">
+                <div class="hero-metric-label">Languages</div>
+                <div class="hero-metric-value">English, Spanish, Chinese</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-4 mb-lg-5">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="section-card h-100">
+            <div class="section-kicker">Overview</div>
+            <h2 class="section-title">Professional Summary</h2>
+            <p class="mb-0 text-secondary">
+              Detail-oriented professional who pairs day-to-day execution with strategic thinking.
+              Recognized for building organized systems, communicating clearly with clients and
+              leadership, and stepping into responsibility early. Brings a polished presence,
+              entrepreneurial initiative, and a track record of leadership across business,
+              academics, and service.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="profile-card">
+            <div class="section-kicker">Core Strengths</div>
+            <div class="skill-badge">Financial Reporting</div>
+            <div class="skill-badge">Invoice Preparation</div>
+            <div class="skill-badge">Process Improvement</div>
+            <div class="skill-badge">Client Communication</div>
+            <div class="skill-badge">Leadership</div>
+            <div class="skill-badge">Public Speaking</div>
+            <div class="skill-badge">Cold Calling</div>
+            <div class="skill-badge">Brand Building</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-4 mb-lg-5">
+      <div class="section-card">
+        <div class="section-kicker">Experience</div>
+        <h2 class="section-title">Professional Experience</h2>
+
+        <div class="timeline-item">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+            <div class="timeline-role">Director of Finance</div>
+            <div class="timeline-meta">Sumsion Business Law | May 2024 - Present</div>
+          </div>
+          <ul>
+            <li>Developed processes to identify overdue payments and streamline invoice preparation.</li>
+            <li>Helped increase firm net profits by 25% over a two-year period.</li>
+            <li>Created internal reporting tools to highlight growth trends and operational weak points.</li>
+            <li>Built compensation plans designed to strengthen retention and team performance.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+            <div class="timeline-role">Professional Magician</div>
+            <div class="timeline-meta">J&amp;J Magic | January 2020 - Present</div>
+          </div>
+          <ul>
+            <li>Founded and developed J&amp;J Magic into a polished client-facing entertainment brand.</li>
+            <li>Performed more than 100 career shows, including over 50 performances in 2024.</li>
+            <li>Built a client base through direct outreach, marketing materials, and a refined sales pitch.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+            <div class="timeline-role">Magic Educator</div>
+            <div class="timeline-meta">Jason Fun Magic | June 2023 - August 2024</div>
+          </div>
+          <ul>
+            <li>Delivered engaging instruction using a scripted curriculum while improving lesson flow.</li>
+            <li>Built strong classroom rapport and maintained a reliable, energetic learning environment.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-4 mb-lg-5">
+      <div class="section-card">
+        <div class="section-kicker">Education Journey</div>
+        <h2 class="section-title">College and High School Accomplishments</h2>
+        <p class="text-secondary mb-4">
+          The tabs below separate current college work from high school achievements so each stage
+          of experience is easy to review.
+        </p>
+
+        <ul class="nav nav-pills professional-tabs" id="academicTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="college-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#college-panel"
+              type="button"
+              role="tab"
+              aria-controls="college-panel"
+              aria-selected="true"
+            >
+              College Experience
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="highschool-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#highschool-panel"
+              type="button"
+              role="tab"
+              aria-controls="highschool-panel"
+              aria-selected="false"
+            >
+              High School Achievements
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div
+            class="tab-pane fade show active"
+            id="college-panel"
+            role="tabpanel"
+            aria-labelledby="college-tab"
+            tabindex="0"
+          >
+            <div class="tab-panel">
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">University</div>
+                    <strong>Brigham Young University</strong>
+                    <span class="text-secondary">Freshman | June 2025 - Present</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">Current GPA</div>
+                    <strong>3.9</strong>
+                    <span class="text-secondary">Strong academic start</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">Academic Focus</div>
+                    <strong>Finance and Business</strong>
+                    <span class="text-secondary">Quantitative and managerial coursework</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-heading mb-2">Current Coursework</div>
+              <p class="text-secondary mb-0">
+                ECON 110, ACC 200, FIN 201, ACC 310, and IS 201.
+              </p>
+
+              <div class="divider-line"></div>
+
+              <div class="mini-heading mb-2">Case Competition Achievement</div>
+              <p class="text-secondary mb-0">
+                In March 2026, competed in Brigham Young University's Corporate Finance and
+                Advisory Association Case Competition in partnership with Sunoco. Worked with a
+                team to identify acquisition opportunities that could support Sunoco's future
+                growth, then presented recommendations to Sunoco leaders, including the Chief of
+                M&amp;A and the Chief Financial Officer. Earned second place in the competition.
+              </p>
+
+              <div class="divider-line"></div>
+
+              <div class="mini-heading mb-2">College Positioning</div>
+              <p class="text-secondary mb-0">
+                Building a strong foundation for a professional path in finance through rigorous
+                coursework, disciplined performance, and direct real-world responsibility in a
+                finance leadership role.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="tab-pane fade"
+            id="highschool-panel"
+            role="tabpanel"
+            aria-labelledby="highschool-tab"
+            tabindex="0"
+          >
+            <div class="tab-panel">
+              <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">School</div>
+                    <strong>Karl G. Maeser Preparatory Academy</strong>
+                    <span class="text-secondary">Graduate | August 2022 - May 2025</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">Academic Record</div>
+                    <strong>3.95 GPA | ACT 33</strong>
+                    <span class="text-secondary">Consistent high performance</span>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="feature-stat">
+                    <div class="feature-stat-label">Recognition</div>
+                    <strong>Sterling Scholar Finalist</strong>
+                    <span class="text-secondary">World Language category</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-4">
+                <div class="col-lg-6">
+                  <div class="mini-heading mb-2">Leadership and Service</div>
+                  <ul class="mb-0 text-secondary">
+                    <li>Student Body President, 2024 - 2025</li>
+                    <li>National Honors Society President, March 2022 - August 2024</li>
+                    <li>Helped raise $3,000 for humanitarian efforts.</li>
+                    <li>Tennis Team Captain, 2022 - Present</li>
+                    <li>Volunteer with Food and Care Coalition, 2014 - Present</li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mini-heading mb-2">Academic Distinction</div>
+                  <ul class="mb-0 text-secondary">
+                    <li>Passed AP Biology.</li>
+                    <li>Passed AP Chinese Culture and Language.</li>
+                    <li>Passed AP Calculus AB.</li>
+                    <li>Passed AP Government and Politics.</li>
+                    <li>Passed AP Spanish Literature and Culture.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-2">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="section-card h-100">
+            <div class="section-kicker">Leadership</div>
+            <h2 class="section-title">Leadership and Service Highlights</h2>
+
+            <div class="timeline-item">
+              <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                <div class="timeline-role">Student Body President</div>
+                <div class="timeline-meta">Karl G. Maeser Preparatory Academy | 2024 - 2025</div>
+              </div>
+              <ul>
+                <li>Led school-wide mentoring efforts to strengthen culture and student unity.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item">
+              <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                <div class="timeline-role">National Honors Society President</div>
+                <div class="timeline-meta">Maeser | March 2022 - August 2024</div>
+              </div>
+              <ul>
+                <li>Directed service initiatives and helped raise $3,000 for humanitarian causes.</li>
+              </ul>
+            </div>
+
+            <div class="timeline-item">
+              <div class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2">
+                <div class="timeline-role">Volunteer and Team Captain</div>
+                <div class="timeline-meta">Community and Athletics | Ongoing</div>
+              </div>
+              <ul>
+                <li>Served regularly with the Food and Care Coalition in Utah County.</li>
+                <li>Provided leadership as Tennis Team Captain through accountability and example.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="section-card mb-4">
+            <div class="section-kicker">Languages</div>
+            <h2 class="section-title h3">Communication Skills</h2>
+            <div class="skill-badge">English</div>
+            <div class="skill-badge">Spanish</div>
+            <div class="skill-badge">Chinese</div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-kicker">Reference</div>
+            <h2 class="section-title h3">Professional Reference</h2>
+            <p class="mb-1 fw-bold">Steve Sumsion</p>
+            <p class="text-secondary mb-2">Head Attorney, Sumsion Business Law</p>
+            <p class="mb-0">
+              <a href="mailto:steve@businesslawutah.com">steve@businesslawutah.com</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pt-2 pb-4">
+      <div class="section-card">
+        <div class="section-kicker">Connect</div>
+        <h2 class="section-title">About Me</h2>
+        <p class="text-secondary mb-4">
+          I am pursuing opportunities where I can combine finance, communication, and leadership
+          to create measurable value. My experience spans business operations, client-facing work,
+          entrepreneurship, and academic achievement, and I bring a thoughtful, professional
+          approach to every team I join. I love learning new languages and have a strong interest
+          in international experiences, having lived in Israel and China and traveled to more than
+          a dozen other countries. From May 2026 to May 2028, I will serve a mission for The
+          Church of Jesus Christ of Latter-day Saints in the San Diego area, where I will be
+          speaking Arabic.
+        </p>
+        <div class="d-flex flex-wrap gap-2 gap-lg-3">
+          <a class="profile-chip" href="tel:18014276518">(801) 427-6518</a>
+          <a class="profile-chip" href="mailto:josephfhilton@gmail.com">josephfhilton@gmail.com</a>
+          <a class="profile-chip" href="https://www.linkedin.com/in/josephfhilton/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+          <a class="profile-chip" href="https://www.instagram.com/josephfhilton/" target="_blank" rel="noreferrer">Instagram Profile</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center pb-4">
+      <a class="profile-chip" href="#">Back to Top</a>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
