@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Compound interest growth illustration</title>
+  <desc id="desc">A simple chart showing increasing account growth over time.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2a43" />
+      <stop offset="100%" stop-color="#214d74" />
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#c49345" />
+      <stop offset="100%" stop-color="#f0c987" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg)" rx="28" />
+  <rect x="70" y="80" width="1060" height="540" rx="24" fill="#f6f9fc" opacity="0.96" />
+
+  <text x="120" y="150" font-family="Georgia, serif" font-size="42" fill="#102c45">Compound Interest Over Time</text>
+  <text x="120" y="190" font-family="Arial, sans-serif" font-size="24" fill="#51606f">Growth accelerates as returns begin earning returns.</text>
+
+  <line x1="140" y1="540" x2="1040" y2="540" stroke="#c8d3de" stroke-width="4" />
+  <line x1="140" y1="260" x2="140" y2="540" stroke="#c8d3de" stroke-width="4" />
+
+  <rect x="210" y="470" width="95" height="70" rx="14" fill="url(#bar)" />
+  <rect x="360" y="420" width="95" height="120" rx="14" fill="url(#bar)" />
+  <rect x="510" y="345" width="95" height="195" rx="14" fill="url(#bar)" />
+  <rect x="660" y="250" width="95" height="290" rx="14" fill="url(#bar)" />
+  <rect x="810" y="120" width="95" height="420" rx="14" fill="url(#bar)" />
+
+  <path d="M257 470 C350 390, 430 365, 557 300 S 760 180, 857 120" fill="none" stroke="#102c45" stroke-width="8" stroke-linecap="round" />
+  <circle cx="257" cy="470" r="9" fill="#102c45" />
+  <circle cx="557" cy="300" r="9" fill="#102c45" />
+  <circle cx="857" cy="120" r="9" fill="#102c45" />
+
+  <text x="225" y="585" font-family="Arial, sans-serif" font-size="22" fill="#51606f">Year 1</text>
+  <text x="375" y="585" font-family="Arial, sans-serif" font-size="22" fill="#51606f">Year 3</text>
+  <text x="525" y="585" font-family="Arial, sans-serif" font-size="22" fill="#51606f">Year 5</text>
+  <text x="675" y="585" font-family="Arial, sans-serif" font-size="22" fill="#51606f">Year 7</text>
+  <text x="825" y="585" font-family="Arial, sans-serif" font-size="22" fill="#51606f">Year 10</text>
+
+  <text x="955" y="160" font-family="Arial, sans-serif" font-size="24" fill="#102c45">Compounding</text>
+  <text x="955" y="194" font-family="Arial, sans-serif" font-size="24" fill="#102c45">becomes more visible</text>
+  <text x="955" y="228" font-family="Arial, sans-serif" font-size="24" fill="#102c45">the longer money stays invested.</text>
+</svg>
