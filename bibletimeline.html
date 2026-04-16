@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Bible Timeline</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(to bottom, #f7f1e3, #efe6d1);
+      color: #2c2c2c;
+    }
+
+    header {
+      background: #3d4b66;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.4rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.05rem;
+      color: #e3e9f5;
+    }
+
+    .nav-top {
+      text-align: center;
+      padding: 14px;
+      background: #e4dcc9;
+      border-bottom: 1px solid #cdbf9e;
+    }
+
+    .nav-top a {
+      color: #2e4a73;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+    }
+
+    .nav-top a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1300px;
+      margin: 30px auto 120px auto;
+    }
+
+    .intro-box,
+    .details-box,
+    .era-box {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .intro-box h2,
+    .details-box h2,
+    .era-box h2 {
+      margin-top: 0;
+      color: #243b5a;
+    }
+
+    .era-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .person-btn {
+      background: #f4efe4;
+      border: 1px solid #d7ccb3;
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 0.98rem;
+      text-align: left;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .person-btn:hover {
+      background: #ece3d2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .details-box {
+      border-left: 6px solid #7a5c28;
+    }
+
+    .details-box p {
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dbe7f6;
+      color: #27496d;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #2f3b52;
+      border-top: 3px solid #cfb677;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      z-index: 999;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 12px 10px;
+    }
+
+    .timeline-bar a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      padding: 10px 14px;
+      background: #44536f;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      transition: background 0.15s ease;
+    }
+
+    .timeline-bar a:hover {
+      background: #5b6d8e;
+    }
+
+    .small-note {
+      font-size: 0.92rem;
+      color: #5a5a5a;
+    }
+
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .person-btn {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Interactive Bible Timeline</h1>
+    <p>Explore major biblical figures, how they connect, and where they fit in salvation history.</p>
+  </header>
+
+  <div class="nav-top">
+    <a href="scratch.html">Back to Scratch Page</a>
+    <a href="#details">Jump to Person Details</a>
+    <a href="#era-beginnings">Start at the Beginning</a>
+  </div>
+
+  <div class="container">
+
+    <div class="intro-box">
+      <h2>How to Use This Timeline</h2>
+      <p>
+        Click any name below to see who that person was, why they matter, and how they connect to other biblical figures.
+        The eras move from earliest figures to later prophets, kings, exile, and Persian-period people.
+      </p>
+      <p class="small-note">
+        Some biblical people are easy to place exactly in time; others, like Job, are harder to date precisely.
+        This page places them in the most reasonable biblical context for learning and study.
+      </p>
+    </div>
+
+    <div class="details-box" id="details">
+      <h2>Click a Person</h2>
+      <p>Select a name from one of the eras below. Their details will appear here.</p>
+    </div>
+
+    <div class="era-box" id="era-beginnings">
+      <h2>1. Beginnings</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('adam')">Adam</button>
+        <button class="person-btn" onclick="showPerson('eve')">Eve</button>
+        <button class="person-btn" onclick="showPerson('noah')">Noah</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-patriarchs">
+      <h2>2. Patriarchs and Family Line</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('abraham')">Abraham</button>
+        <button class="person-btn" onclick="showPerson('sarah')">Sarah</button>
+        <button class="person-btn" onclick="showPerson('lot')">Lot</button>
+        <button class="person-btn" onclick="showPerson('hagar')">Hagar</button>
+        <button class="person-btn" onclick="showPerson('ishmael')">Ishmael</button>
+        <button class="person-btn" onclick="showPerson('rebekah')">Rebekah</button>
+        <button class="person-btn" onclick="showPerson('jacob')">Jacob</button>
+        <button class="person-btn" onclick="showPerson('leah')">Leah</button>
+        <button class="person-btn" onclick="showPerson('rachel')">Rachel</button>
+        <button class="person-btn" onclick="showPerson('dinah')">Dinah</button>
+        <button class="person-btn" onclick="showPerson('judah')">Judah</button>
+        <button class="person-btn" onclick="showPerson('tamar')">Tamar</button>
+        <button class="person-btn" onclick="showPerson('joseph')">Joseph</button>
+        <button class="person-btn" onclick="showPerson('job')">Job</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-exodus">
+      <h2>3. Exodus and Conquest</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('moses')">Moses</button>
+        <button class="person-btn" onclick="showPerson('jethro')">Jethro</button>
+        <button class="person-btn" onclick="showPerson('joshua')">Joshua</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-judges">
+      <h2>4. Judges and Early Monarchy</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('elimelech')">Elimelech</button>
+        <button class="person-btn" onclick="showPerson('naomi')">Naomi</button>
+        <button class="person-btn" onclick="showPerson('ruth')">Ruth</button>
+        <button class="person-btn" onclick="showPerson('boaz')">Boaz</button>
+        <button class="person-btn" onclick="showPerson('hannah')">Hannah</button>
+        <button class="person-btn" onclick="showPerson('samuel')">Samuel</button>
+        <button class="person-btn" onclick="showPerson('saul')">Saul</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-divided-kingdom">
+      <h2>5. Divided Kingdom: Israel and Judah</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('rehoboam')">Rehoboam</button>
+        <button class="person-btn" onclick="showPerson('jeroboam')">Jeroboam</button>
+        <button class="person-btn" onclick="showPerson('ahab')">Ahab</button>
+        <button class="person-btn" onclick="showPerson('jezebel')">Jezebel</button>
+        <button class="person-btn" onclick="showPerson('elijah')">Elijah</button>
+        <button class="person-btn" onclick="showPerson('theWidowOfZarephath')">The Widow of Zarephath</button>
+        <button class="person-btn" onclick="showPerson('elisha')">Elisha</button>
+        <button class="person-btn" onclick="showPerson('naaman')">Naaman</button>
+        <button class="person-btn" onclick="showPerson('theShunemiteWoman')">The Shunemite Woman</button>
+        <button class="person-btn" onclick="showPerson('jehoshaphat')">Jehoshaphat</button>
+        <button class="person-btn" onclick="showPerson('hoshea')">Hoshea</button>
+        <button class="person-btn" onclick="showPerson('jonah')">Jonah</button>
+        <button class="person-btn" onclick="showPerson('joashiahplaceholder')" style="display:none;"></button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-late-judah">
+      <h2>6. Later Judah and the Great Prophets</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('uzziah')">Uzziah</button>
+        <button class="person-btn" onclick="showPerson('isaiah')">Isaiah</button>
+        <button class="person-btn" onclick="showPerson('ahaz')">Ahaz</button>
+        <button class="person-btn" onclick="showPerson('hezekiah')">Hezekiah</button>
+        <button class="person-btn" onclick="showPerson('nahum')">Nahum</button>
+        <button class="person-btn" onclick="showPerson('zephaniah')">Zephaniah</button>
+        <button class="person-btn" onclick="showPerson('habakkuk')">Habakkuk</button>
+        <button class="person-btn" onclick="showPerson('josiah')">Josiah</button>
+        <button class="person-btn" onclick="showPerson('jeremiah')">Jeremiah</button>
+        <button class="person-btn" onclick="showPerson('baruch')">Baruch</button>
+        <button class="person-btn" onclick="showPerson('ebedMelech')">Ebed-melech</button>
+        <button class="person-btn" onclick="showPerson('jehoiachin')">Jehoiachin</button>
+        <button class="person-btn" onclick="showPerson('zedekiah')">Zedekiah</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-exile">
+      <h2>7. Exile in Babylon</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('daniel')">Daniel</button>
+        <button class="person-btn" onclick="showPerson('hananiah')">Hananiah</button>
+      </div>
+    </div>
+
+    <div class="era-box" id="era-persian">
+      <h2>8. Persian Period</h2>
+      <div class="era-grid">
+        <button class="person-btn" onclick="showPerson('cyrus')">Cyrus</button>
+        <button class="person-btn" onclick="showPerson('xerxes')">Xerxes (Ahasuerus)</button>
+        <button class="person-btn" onclick="showPerson('esther')">Esther</button>
+        <button class="person-btn" onclick="showPerson('haman')">Haman</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="timeline-bar">
+    <a href="#era-beginnings">Beginnings</a>
+    <a href="#era-patriarchs">Patriarchs</a>
+    <a href="#era-exodus">Exodus</a>
+    <a href="#era-judges">Judges</a>
+    <a href="#era-divided-kingdom">Divided Kingdom</a>
+    <a href="#era-late-judah">Later Judah</a>
+    <a href="#era-exile">Exile</a>
+    <a href="#era-persian">Persian Period</a>
+    <a href="#details">Details Panel</a>
+  </div>
+
+  <script>
+    const people = {
+      adam: {
+        name: "Adam",
+        era: "Beginnings",
+        details: "Adam is presented as the first man in Genesis. He is placed in Eden and enters the story of the Fall through disobedience.",
+        connections: "Husband of Eve. Ancestor of Noah and, ultimately, all humanity in the biblical narrative."
+      },
+      eve: {
+        name: "Eve",
+        era: "Beginnings",
+        details: "Eve is the first woman in Genesis. She stands at the beginning of human history and the story of the Fall.",
+        connections: "Wife of Adam. Mother of later human generations in the biblical account."
+      },
+      noah: {
+        name: "Noah",
+        era: "Beginnings",
+        details: "Noah is the righteous man preserved through the flood. He builds the ark and becomes a new starting point for humanity after judgment.",
+        connections: "Descendant of Adam and Eve. Precedes Abraham in the biblical timeline."
+      },
+      abraham: {
+        name: "Abraham",
+        era: "Patriarchs",
+        details: "Abraham is the covenant patriarch called by God. God promises him descendants, land, and blessing for all nations through his line.",
+        connections: "Husband of Sarah. Father of Ishmael through Hagar and ancestor of Jacob through Isaac's line."
+      },
+      sarah: {
+        name: "Sarah",
+        era: "Patriarchs",
+        details: "Sarah is Abraham’s wife and the mother of the covenant child, Isaac. Her story emphasizes faith, waiting, and God’s power.",
+        connections: "Wife of Abraham. Rival tension with Hagar. Ancestor of Jacob through Isaac."
+      },
+      lot: {
+        name: "Lot",
+        era: "Patriarchs",
+        details: "Lot is Abraham’s nephew. He separates from Abraham and later escapes the destruction of Sodom.",
+        connections: "Nephew of Abraham. Connected to the early patriarchal family story."
+      },
+      hagar: {
+        name: "Hagar",
+        era: "Patriarchs",
+        details: "Hagar is Sarah’s servant and the mother of Ishmael. Her story highlights suffering, divine notice, and survival in the wilderness.",
+        connections: "Mother of Ishmael. Connected closely to Abraham and Sarah."
+      },
+      ishmael: {
+        name: "Ishmael",
+        era: "Patriarchs",
+        details: "Ishmael is the son of Abraham and Hagar. Though not the covenant line in Genesis, he is blessed and becomes the father of a great people.",
+        connections: "Son of Abraham and Hagar. Half-brother of Isaac."
+      },
+      rebekah: {
+        name: "Rebekah",
+        era: "Patriarchs",
+        details: "Rebekah becomes the wife of Isaac and the mother of Jacob and Esau. She plays a major role in the continuation of the covenant family.",
+        connections: "Mother of Jacob. Daughter-in-law of Abraham and Sarah."
+      },
+      jacob: {
+        name: "Jacob",
+        era: "Patriarchs",
+        details: "Jacob, later named Israel, becomes the father of the twelve tribes. His life includes conflict, covenant, and transformation.",
+        connections: "Son of Rebekah and Isaac. Husband of Leah and Rachel. Father of Joseph, Dinah, Judah, and other tribal ancestors."
+      },
+      leah: {
+        name: "Leah",
+        era: "Patriarchs",
+        details: "Leah is Jacob’s first wife. She becomes the mother of several sons central to Israel’s future, including Judah.",
+        connections: "Wife of Jacob. Sister of Rachel. Mother of Judah and Dinah."
+      },
+      rachel: {
+        name: "Rachel",
+        era: "Patriarchs",
+        details: "Rachel is Jacob’s beloved wife and the mother of Joseph and Benjamin.",
+        connections: "Wife of Jacob. Sister of Leah. Mother of Joseph."
+      },
+      dinah: {
+        name: "Dinah",
+        era: "Patriarchs",
+        details: "Dinah is the daughter of Jacob and Leah. Her story in Genesis highlights family honor, violence, and the instability of the patriarchal era.",
+        connections: "Daughter of Jacob and Leah. Sister of Judah and Joseph’s half-siblings."
+      },
+      judah: {
+        name: "Judah",
+        era: "Patriarchs",
+        details: "Judah is one of Jacob’s sons and becomes the ancestor of the tribe and royal line associated with David and later Judah.",
+        connections: "Son of Jacob and Leah. Father-in-law of Tamar in Genesis. Ancestor of Boaz and later kings of Judah."
+      },
+      tamar: {
+        name: "Tamar",
+        era: "Patriarchs",
+        details: "Tamar appears in Genesis 38. Her story is complicated but crucial because she preserves Judah’s family line.",
+        connections: "Connected to Judah by marriage and offspring. Important to the lineage that later leads toward David."
+      },
+      joseph: {
+        name: "Joseph",
+        era: "Patriarchs",
+        details: "Joseph is sold into Egypt but rises to power and preserves his family during famine. His life shows providence, suffering, and reconciliation.",
+        connections: "Son of Jacob and Rachel. Brother of Judah and Dinah. His story moves Israel into Egypt before Moses."
+      },
+      job: {
+        name: "Job",
+        era: "Patriarchal / Wisdom Context",
+        details: "Job is a righteous sufferer whose story wrestles with pain, justice, and trust in God. His exact date is uncertain, though many place him in an early setting.",
+        connections: "Not tightly connected genealogically to the patriarchs, but often studied near early biblical history."
+      },
+      moses: {
+        name: "Moses",
+        era: "Exodus",
+        details: "Moses leads Israel out of Egypt, receives the law, and becomes the central prophetic leader of the Exodus.",
+        connections: "Successor to Joseph’s Egypt period in the larger story. Father-in-law is Jethro. Mentor to Joshua."
+      },
+      jethro: {
+        name: "Jethro",
+        era: "Exodus",
+        details: "Jethro is Moses’ father-in-law and a wise counselor who advises him to share leadership responsibility.",
+        connections: "Father-in-law of Moses. Helps shape Israel’s leadership structure."
+      },
+      joshua: {
+        name: "Joshua",
+        era: "Exodus / Conquest",
+        details: "Joshua succeeds Moses and leads Israel into the Promised Land. He is associated with covenant renewal and conquest.",
+        connections: "Successor to Moses. Comes after the Exodus generation."
+      },
+      elimelech: {
+        name: "Elimelech",
+        era: "Judges",
+        details: "Elimelech is Naomi’s husband in the book of Ruth. He leaves Bethlehem during famine and dies in Moab.",
+        connections: "Husband of Naomi. Father-in-law of Ruth."
+      },
+      naomi: {
+        name: "Naomi",
+        era: "Judges",
+        details: "Naomi loses her husband and sons but returns to Bethlehem with Ruth. Her story is one of bitterness, loyalty, and restoration.",
+        connections: "Wife of Elimelech. Mother-in-law of Ruth. Connected to Boaz."
+      },
+      ruth: {
+        name: "Ruth",
+        era: "Judges",
+        details: "Ruth is a Moabite woman whose loyalty to Naomi and faithfulness lead her into Israel’s covenant people.",
+        connections: "Widow in Naomi’s family. Marries Boaz. Ancestor of David."
+      },
+      boaz: {
+        name: "Boaz",
+        era: "Judges",
+        details: "Boaz is the kinsman-redeemer who marries Ruth and preserves the family line.",
+        connections: "Husband of Ruth. Descendant of Judah’s line. Ancestor of David."
+      },
+      hannah: {
+        name: "Hannah",
+        era: "Early Monarchy",
+        details: "Hannah prays for a child and dedicates Samuel to God. Her story emphasizes faithful pleading and covenant devotion.",
+        connections: "Mother of Samuel."
+      },
+      samuel: {
+        name: "Samuel",
+        era: "Early Monarchy",
+        details: "Samuel is prophet, judge, and king-maker. He stands between the period of the judges and the monarchy.",
+        connections: "Son of Hannah. Anoints Saul and later David."
+      },
+      saul: {
+        name: "Saul",
+        era: "Early Monarchy",
+        details: "Saul is the first king of Israel. His reign begins with promise but declines through disobedience.",
+        connections: "Anointed by Samuel. Precedes the divided kingdom line of later kings."
+      },
+      rehoboam: {
+        name: "Rehoboam",
+        era: "Divided Kingdom",
+        details: "Rehoboam is the son of Solomon whose harshness helps split the kingdom into north and south.",
+        connections: "Rival of Jeroboam. King in Judah after the kingdom divides."
+      },
+      jeroboam: {
+        name: "Jeroboam",
+        era: "Divided Kingdom",
+        details: "Jeroboam becomes the first king of the northern kingdom of Israel after the split.",
+        connections: "Rival of Rehoboam. Sets patterns later followed by kings like Ahab and Hoshea."
+      },
+      ahab: {
+        name: "Ahab",
+        era: "Divided Kingdom",
+        details: "Ahab is a northern king remembered for wickedness and idolatry, especially his support of Baal worship.",
+        connections: "Husband of Jezebel. Opposed by Elijah."
+      },
+      jezebel: {
+        name: "Jezebel",
+        era: "Divided Kingdom",
+        details: "Jezebel is Ahab’s wife and a strong promoter of Baal worship. She becomes a symbol of corruption and persecution of the prophets.",
+        connections: "Wife of Ahab. Enemy of Elijah."
+      },
+      elijah: {
+        name: "Elijah",
+        era: "Divided Kingdom",
+        details: "Elijah is a prophet of dramatic confrontation who calls Israel back to covenant faithfulness.",
+        connections: "Opposes Ahab and Jezebel. Helps the widow of Zarephath. Mentor to Elisha."
+      },
+      theWidowOfZarephath: {
+        name: "The Widow of Zarephath",
+        era: "Divided Kingdom",
+        details: "She shelters Elijah during famine and witnesses miracles involving flour, oil, and the raising of her son.",
+        connections: "Helped by Elijah during Ahab’s era."
+      },
+      elisha: {
+        name: "Elisha",
+        era: "Divided Kingdom",
+        details: "Elisha is Elijah’s successor. His ministry includes healing, restoration, and prophetic counsel.",
+        connections: "Successor to Elijah. Heals Naaman. Helps the Shunemite woman."
+      },
+      naaman: {
+        name: "Naaman",
+        era: "Divided Kingdom",
+        details: "Naaman is a Syrian commander healed of leprosy after obeying Elisha’s instructions.",
+        connections: "Healed by Elisha. Shows God’s power reaching beyond Israel."
+      },
+      theShunemiteWoman: {
+        name: "The Shunemite Woman",
+        era: "Divided Kingdom",
+        details: "This faithful woman provides hospitality for Elisha and later experiences the miracle of her son’s restoration.",
+        connections: "Connected to Elisha through hospitality and miracle."
+      },
+      jehoshaphat: {
+        name: "Jehoshaphat",
+        era: "Divided Kingdom",
+        details: "Jehoshaphat is a king of Judah remembered for seeking the Lord, though he also forms risky alliances with the northern kingdom.",
+        connections: "Contemporary of Ahab in parts of the narrative."
+      },
+      hoshea: {
+        name: "Hoshea",
+        era: "Divided Kingdom",
+        details: "Hoshea is the last king of the northern kingdom of Israel before Assyria conquers it.",
+        connections: "Comes at the end of the northern kingdom line that began with Jeroboam."
+      },
+      jonah: {
+        name: "Jonah",
+        era: "Divided Kingdom",
+        details: "Jonah is the prophet sent to Nineveh. His story highlights mercy, repentance, and resistance to God’s calling.",
+        connections: "Prophet associated with the northern kingdom period."
+      },
+      uzziah: {
+        name: "Uzziah",
+        era: "Later Judah",
+        details: "Uzziah is a king of Judah whose reign is strong but ends in pride and judgment.",
+        connections: "Isaiah’s call is dated to the year of King Uzziah’s death."
+      },
+      isaiah: {
+        name: "Isaiah",
+        era: "Later Judah",
+        details: "Isaiah is one of the major prophets, preaching holiness, judgment, hope, and messianic promise.",
+        connections: "Active during the reigns of Uzziah, Ahaz, and Hezekiah."
+      },
+      ahaz: {
+        name: "Ahaz",
+        era: "Later Judah",
+        details: "Ahaz is a king of Judah known for fear, poor faith, and destructive alliances.",
+        connections: "Father of Hezekiah. Addressed by Isaiah."
+      },
+      hezekiah: {
+        name: "Hezekiah",
+        era: "Later Judah",
+        details: "Hezekiah is a reforming king of Judah who trusts God during the Assyrian crisis.",
+        connections: "Son of Ahaz. Receives counsel and prophecy from Isaiah."
+      },
+      nahum: {
+        name: "Nahum",
+        era: "Later Judah",
+        details: "Nahum prophesies judgment against Nineveh and emphasizes that oppressive empires do not stand forever.",
+        connections: "His message follows the Assyrian era that affected Judah and Israel."
+      },
+      zephaniah: {
+        name: "Zephaniah",
+        era: "Later Judah",
+        details: "Zephaniah warns of coming judgment but also promises restoration for the faithful remnant.",
+        connections: "Associated with the time of Josiah."
+      },
+      habakkuk: {
+        name: "Habakkuk",
+        era: "Later Judah",
+        details: "Habakkuk wrestles with the problem of evil and the use of Babylon as an instrument of judgment.",
+        connections: "Near the end of Judah before exile. Contemporary in spirit with Jeremiah’s era."
+      },
+      josiah: {
+        name: "Josiah",
+        era: "Later Judah",
+        details: "Josiah is a reforming king who leads Judah in covenant renewal after the book of the law is discovered.",
+        connections: "Associated with Zephaniah and the last period before Jerusalem’s fall."
+      },
+      jeremiah: {
+        name: "Jeremiah",
+        era: "Later Judah / Exile",
+        details: "Jeremiah warns Judah of coming destruction, calls for repentance, and lives through Jerusalem’s collapse.",
+        connections: "Works with Baruch. Helped by Ebed-melech. Speaks during the reigns of Josiah, Jehoiachin, and Zedekiah."
+      },
+      baruch: {
+        name: "Baruch",
+        era: "Later Judah / Exile",
+        details: "Baruch is Jeremiah’s scribe and close companion, preserving and recording prophetic words.",
+        connections: "Scribe and associate of Jeremiah."
+      },
+      ebedMelech: {
+        name: "Ebed-melech",
+        era: "Later Judah / Exile",
+        details: "Ebed-melech is an Ethiopian official who courageously rescues Jeremiah from a cistern.",
+        connections: "Protects Jeremiah during the final days of Judah."
+      },
+      jehoiachin: {
+        name: "Jehoiachin",
+        era: "Exile",
+        details: "Jehoiachin is a king of Judah taken into Babylonian exile after a very short reign.",
+        connections: "Precedes Zedekiah. Part of the collapse of Judah described by Jeremiah."
+      },
+      zedekiah: {
+        name: "Zedekiah",
+        era: "Exile",
+        details: "Zedekiah is Judah’s last king before Jerusalem falls to Babylon.",
+        connections: "Receives warnings from Jeremiah. Final king before the exile fully takes effect."
+      },
+      daniel: {
+        name: "Daniel",
+        era: "Babylonian Exile",
+        details: "Daniel is an exile who remains faithful in Babylon and serves in royal courts while receiving visions and interpreting dreams.",
+        connections: "Lives during exile under Babylonian and Persian rulers."
+      },
+      hananiah: {
+        name: "Hananiah",
+        era: "Babylonian Exile",
+        details: "Hananiah is one of Daniel’s faithful companions, better known by his Babylonian name Shadrach.",
+        connections: "Friend and companion of Daniel. Part of the fiery furnace story."
+      },
+      cyrus: {
+        name: "Cyrus",
+        era: "Persian Period",
+        details: "Cyrus is the Persian king who allows exiled Jews to return and rebuild.",
+        connections: "Follows the Babylonian period. Connected to the end of exile and, in Isaiah, even named in prophecy."
+      },
+      xerxes: {
+        name: "Xerxes (Ahasuerus)",
+        era: "Persian Period",
+        details: "Xerxes, called Ahasuerus in Esther, is the Persian king during Esther’s story.",
+        connections: "King in Esther’s narrative. Husband of Esther."
+      },
+      esther: {
+        name: "Esther",
+        era: "Persian Period",
+        details: "Esther is a Jewish queen in Persia who courageously intervenes to save her people.",
+        connections: "Wife of Xerxes (Ahasuerus). Opposes Haman."
+      },
+      haman: {
+        name: "Haman",
+        era: "Persian Period",
+        details: "Haman is the villain of Esther’s story who seeks the destruction of the Jews.",
+        connections: "Enemy of Esther and the Jewish people under Xerxes."
+      }
+    };
+
+    function showPerson(key) {
+      const p = people[key];
+      document.getElementById("details").innerHTML = `
+        <h2>${p.name}</h2>
+        <div class="tag">${p.era}</div>
+        <p><strong>Who they are:</strong> ${p.details}</p>
+        <p><strong>How they connect:</strong> ${p.connections}</p>
+      `;
+      document.getElementById("details").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  </script>
+
+</body>
+</html>
